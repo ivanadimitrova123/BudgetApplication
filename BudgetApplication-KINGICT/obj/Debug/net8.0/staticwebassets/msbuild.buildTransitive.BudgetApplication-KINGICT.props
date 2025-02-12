@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BudgetApplication-KINGICT.props" />
+</Project>
