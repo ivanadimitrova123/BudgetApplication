@@ -170,3 +170,4 @@ C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-KINGICT\obj\D
 C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-KINGICT\obj\Debug\net8.0\ref\BudgetApplication-KINGICT.dll
 C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-KINGICT\obj\Debug\net8.0\BudgetApplication-KINGICT.sourcelink.json

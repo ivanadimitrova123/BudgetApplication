@@ -36,7 +36,7 @@ public class UserRepository : IUserRepository
         var positionExists = await _context.Positions.AnyAsync(p => p.Id == user.PositionId);
         if (!positionExists)
         {
-            throw new ArgumentException("Position does not exist.");
+            throw new ArgumentException("   Position does not exist.");
         }
         _context.Users.Add(user);
         await SaveChangesAsync();
