@@ -1,12 +1,10 @@
 ﻿using BudgetApplication_KINGICT.Services.Interfaces;
 using BudgetApplication.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace BudgetApplication.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Threading.Tasks;
+
+namespace BudgetApplication.Controllers;
 
 [Authorize] 
 [Route("api/[controller]")]

@@ -1,9 +1,8 @@
-﻿namespace BudgetApplication.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+namespace BudgetApplication.Models;
 
-public class Expense
+public class Income
 {
     public int Id { get; set; }
     public int UserId { get; set; } 
@@ -11,9 +10,9 @@ public class Expense
     public int Year { get; set; }
     public int CategoryId { get; set; }
     [ForeignKey("CategoryId")]
-    public Category? Category { get; set; } 
-    
+    public Category? Category { get; set; }
     [Column(TypeName = "decimal(18,2)")]
     public decimal Amount { get; set; } = 0.00m;
-    public string Type { get; set; } = "Real"; 
+    public string Type { get; set; } = "Real";
+    
 }

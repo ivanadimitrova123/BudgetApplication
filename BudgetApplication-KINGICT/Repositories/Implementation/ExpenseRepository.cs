@@ -15,13 +15,18 @@ public class ExpenseRepository : IExpenseRepository
     }
     public async Task<IEnumerable<Expense>> GetAllExpensesByUserIdAsync(int userId)
     {
-        return await _context.Expenses.Where(e => e.UserId == userId).ToListAsync();
+        return await _context.Expenses
+            .Where(e => e.UserId == userId)
+            .Include(e => e.Category) 
+            .ToListAsync();
     }
 
     public async Task<Expense?> GetExpenseByIdAsync(int id, int userId)
     {
-        return await _context.Expenses.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
-    }
+        return await _context.Expenses
+            .Where(e => e.Id == id && e.UserId == userId)
+            .Include(e => e.Category) 
+            .FirstOrDefaultAsync();    }
 
     public async Task AddExpenseAsync(Expense expense)
     {
