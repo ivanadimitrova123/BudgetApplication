@@ -43,7 +43,7 @@ public class ExpenseService : IExpenseService
 
         existingExpense.Month = expense.Month;
         existingExpense.Year = expense.Year;
-        existingExpense.Category = expense.Category;
+        existingExpense.CategoryId = expense.CategoryId;
         existingExpense.Amount = expense.Amount;
         existingExpense.Type = expense.Type;
 

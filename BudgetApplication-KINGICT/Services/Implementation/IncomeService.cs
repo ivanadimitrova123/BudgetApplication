@@ -33,7 +33,10 @@ public class IncomeService : IIncomeService
     public async Task<bool> UpdateIncomeAsync(Income income)
     {
         var existingIncome = await _incomeRepository.GetIncomeByIdAsync(income.Id, income.UserId);
-        if (existingIncome == null) return false;
+        if (existingIncome == null)
+        {
+            return false;
+        }
 
         existingIncome.Month = income.Month;
         existingIncome.Year = income.Year;
