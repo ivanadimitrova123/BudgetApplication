@@ -1,0 +1,32 @@
+<div class="expense-list">
+    <h2>Your Expenses</h2>
+  
+    <table *ngIf="expenses.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Year</th>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenses">
+          <td>{{ expense.month }}</td>
+          <td>{{ expense.year }}</td>
+          <td>${{ expense.amount.toFixed(2) }}</td>
+          <td>{{ expense.type }}</td>
+          <td>{{ expense.category?.name || 'N/A' }}</td>
+          <td>
+            <button (click)="editExpense(expense.id)">Edit</button>
+            <button (click)="deleteExpense(expense.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <p *ngIf="expenses.length === 0">No expenses found.</p>
+  </div>
+  

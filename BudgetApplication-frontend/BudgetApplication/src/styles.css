@@ -1,0 +1,40 @@
+/* Global styles for a warm background and base typography */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#ngb-live {
+  display: none !important;
+}
+
+.navbar {
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+}
+
+body {
+  margin-top: 90px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

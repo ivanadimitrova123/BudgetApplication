@@ -1,0 +1,12 @@
+<div class="category-container">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <h2>Add Category</h2>
+        <div class="form-group">
+            <label for="category-name">Category Name:</label>
+            <input id="category-name" type="text" formControlName="name" placeholder="Enter category name" required />
+        </div>
+        <button type="submit" [disabled]="categoryForm.invalid">Add Category</button>
+    </form>
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>

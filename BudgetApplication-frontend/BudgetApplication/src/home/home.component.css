@@ -1,0 +1,97 @@
+.home-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #ffffffcc; 
+    border-radius: 8px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+  }
+  
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .budget-table th,
+  .budget-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .budget-table thead {
+    background: #fda085;
+    color: #fff;
+  }
+  
+  .budget-table th[colspan] {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .budget-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+  
+  .action {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .action button {
+    background-color: #fda085;
+    border: none;
+    padding: 12px 24px;
+    color: #fff;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action button:hover {
+    background-color: #f06a4f;
+  }
+
+  .exportPdf {
+    margin-top: 20px;
+  }
+
+  .exportPdf button{
+border: none;    background-color: blue;
+    color: white;
+    padding: 12px 24px;
+    color: #fff;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .total {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.balance {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.total-row {
+  font-weight: bold;
+}
