@@ -1,32 +1,33 @@
 <div class="income-list">
-    <h2>Your Incomes</h2>
-    
-    <table *ngIf="incomes.length > 0" class="table">
-      <thead>
-        <tr>
-          <th>Month</th>
-          <th>Year</th>
-          <th>Category</th>
-          <th>Amount</th>
-          <th>Type</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let income of incomes">
-          <td>{{ income.month }}</td>
-          <td>{{ income.year }}</td>
-          <td>{{ income.category.name }}</td>
-          <td>${{ income.amount }}</td>
-          <td>{{ income.type }}</td>
-          <td>
-            <button (click)="editIncome(income.id)">Edit</button>
-            <button (click)="deleteIncome(income.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <p *ngIf="incomes.length === 0">No incomes found.</p>
-  </div>
-  
+  <h2>Your Incomes</h2>
+
+  <table *ngIf="incomes.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let income of incomes">
+        <td>{{ income.month }}</td>
+        <td>{{ income.year }}</td>
+        <td>{{ income.category.name }}</td>
+        <td>${{ income.amount }}</td>
+        <td>{{ income.type }}</td>
+        <td>
+          <div class="tableActions">
+            <button (click)="editIncome(income.id)" class="editButton">Edit</button>
+            <button (click)="deleteIncome(income.id)" class="deleteButton">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="incomes.length === 0">No incomes found.</p>
+</div>

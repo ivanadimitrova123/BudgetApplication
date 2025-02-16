@@ -344,3 +344,15 @@ C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\Budge
 C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\obj\Debug\net8.0\BudgetApplication-KINGICT.pdb
 C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\obj\Debug\net8.0\BudgetApplication-KINGICT.genruntimeconfig.cache
 C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\obj\Debug\net8.0\ref\BudgetApplication-KINGICT.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Graph.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Graph.Core.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.IdentityModel.Validators.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Abstractions.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Authentication.Azure.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Http.HttpClientLibrary.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Form.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Json.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Multipart.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Text.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Microsoft.Office.Interop.Outlook.dll
+C:\Users\ivana\Desktop\BudgetApplication-KINGICT\BudgetApplication-backend\BudgetApplication-KINGICT\bin\Debug\net8.0\Std.UriTemplate.dll

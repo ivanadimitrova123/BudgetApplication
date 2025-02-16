@@ -1,0 +1,65 @@
+<div class="register-container">
+  <div class="form-container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <h2>Register</h2>
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" formControlName="firstName" placeholder="Enter your first name" required />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" type="text" formControlName="lastName" placeholder="Enter your last name" required />
+      </div>
+      <div class="form-group">
+        <label for="reg-username">Username:</label>
+        <input id="reg-username" type="text" formControlName="username" placeholder="Choose a username" required />
+      </div>
+      <div class="form-group">
+        <label for="passwordHash">Password:</label>
+        <input id="passwordHash" type="password" formControlName="passwordHash" placeholder="Enter a secure password"
+          required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" placeholder="Enter your email" required />
+      </div>
+      <!-- <div class="form-group">
+        <label for="cityId">City:</label>
+        <input id="cityId" type="number" formControlName="cityId" placeholder="City ID" required />
+      </div> -->
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input id="city" type="text" class="form-control" placeholder="Start typing city..." [ngbTypeahead]="searchCity"
+          [resultFormatter]="cityFormatter" [inputFormatter]="cityFormatter" (selectItem)="onCitySelect($event)"
+          [ngModel]="userForm.get('cityName')?.value" [ngModelOptions]="{standalone: true}">
+        <input type="hidden" formControlName="cityId">
+        <small *ngIf="userForm.get('cityId')?.invalid && userForm.get('cityId')?.touched" class="form-text text-danger">
+          City is required
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="position">Position:</label>
+        <input id="position" type="text" class="form-control" [ngbTypeahead]="searchPosition"
+          [resultFormatter]="formatter" [inputFormatter]="formatter" (selectItem)="onPositionSelect($event)"
+          [ngModel]="userForm.get('positionName')?.value" [ngModelOptions]="{standalone: true}">
+        <input type="hidden" formControlName="positionId">
+        <div *ngIf="searchFailed" class="text-danger">Error loading positions</div>
+      </div>
+      <div class="form-group">
+        <label for="yearsInPosition">Years in Position:</label>
+        <input id="yearsInPosition" type="number" formControlName="yearsInPosition" placeholder="Years in Position"
+          required />
+      </div>
+      <div class="form-group">
+        <label for="yearsInExperience">Years in Experience:</label>
+        <input id="yearsInExperience" type="number" formControlName="yearsInExperience"
+          placeholder="Years in Experience" required />
+      </div>
+
+      <p class="switch-link" *ngIf="!isUpdateMode">
+        Already have an account? <a routerLink="/login">Go to login</a>
+      </p>
+      <button type="submit" [disabled]="userForm.invalid">Submit</button>
+    </form>
+  </div>
+</div>

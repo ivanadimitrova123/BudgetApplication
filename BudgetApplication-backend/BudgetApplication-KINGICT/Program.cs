@@ -95,6 +95,9 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
+builder.Services.AddTransient<IEmailService, EmailService>();
+
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

@@ -174,3 +174,48 @@ form div {
   color: #333;
   margin-bottom: 20px;
 }
+
+.expense-list table thead tr th,
+.expense-list table tbody tr td,
+.income-list table thead tr th,
+.income-list table tbody tr td{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.income-list,
+.expense-list {
+  margin: 50px;
+}
+.tableActions {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.editButton,
+.deleteButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.editButton {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #45a049;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #e60000;
+}
