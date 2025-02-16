@@ -1,4 +1,5 @@
-﻿using BudgetApplication_KINGICT.Services.Interfaces;
+﻿using BudgetApplication_KINGICT.Data.Models;
+using BudgetApplication_KINGICT.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,11 +33,11 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddCategory([FromBody] string name)
+    public async Task<IActionResult> AddCategory([FromBody] Category category)
     {
-        var added = await _categoryService.AddCategoryAsync(name);
-        if (!added) return BadRequest(new { message = "Category already exists."});
-        return Ok(new { message = "Category added successfully."});
+        var added = await _categoryService.AddCategoryAsync(category.Name, category.CategoryFor);
+        if (!added) return BadRequest(new { message = "Category already exists." });
+        return Ok(new { message = "Category added successfully." });
     }
 
     [HttpPut("{id}")]
@@ -53,5 +54,19 @@ public class CategoryController : ControllerBase
         var deleted = await _categoryService.DeleteCategoryAsync(id);
         if (!deleted) return NotFound(new { message = "Category not found."});
         return Ok(new { message = "Category deleted successfully."});
+    }
+    
+    [HttpGet("income")]
+    public async Task<IActionResult> GetIncomeCategories()
+    {
+        var categories = await _categoryService.GetCategoriesByTypeAsync("Income");
+        return Ok(categories);
+    }
+
+    [HttpGet("expense")]
+    public async Task<IActionResult> GetExpenseCategories()
+    {
+        var categories = await _categoryService.GetCategoriesByTypeAsync("Expense");
+        return Ok(categories);
     }
 }

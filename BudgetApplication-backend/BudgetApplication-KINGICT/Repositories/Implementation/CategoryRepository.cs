@@ -48,4 +48,11 @@ public class CategoryRepository : ICategoryRepository
     {
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<IEnumerable<Category>> GetCategoriesByTypeAsync(string categoryFor)
+    {
+        return await _context.Categories
+            .Where(c => c.CategoryFor == categoryFor)
+            .ToListAsync();
+    }
 }

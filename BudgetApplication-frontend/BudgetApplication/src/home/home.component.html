@@ -1,3 +1,9 @@
+
+<div class="action">
+    <button type="button" [routerLink]="'/expense'">Add Expense</button>
+    <button type="button" [routerLink]="'/income'">Add Income</button>
+    <button type="button" [routerLink]="'/category'">Add Category</button>
+</div>
 <div class="home-container">
     <h1>Welcome to Your Budget Dashboard</h1>
 
@@ -22,7 +28,7 @@
         </thead>
         <tbody>
             <!-- Expenses Rows -->
-            <tr *ngFor="let category of categories">
+            <tr *ngFor="let category of expenseCategories">
                 <td>{{ category.name }} (Expense)</td>
                 <ng-container *ngFor="let m of months">
                     <td>{{ getExpenseAmount(category.id, m.month, m.year, 'Real') | number:'1.2-2' }}</td>
@@ -40,7 +46,7 @@
             </tr>
 
             <!-- Incomes Rows -->
-            <tr *ngFor="let category of categories">
+            <tr *ngFor="let category of incomeCategories">
                 <td>{{ category.name }} (Income)</td>
                 <ng-container *ngFor="let m of months">
                     <td>{{ getIncomeAmount(category.id, m.month, m.year, 'Real') | number:'1.2-2' }}</td>
@@ -67,4 +73,7 @@
             </tr>
         </tbody>
     </table>
+    <div class="exportPdf">
+        <button type="button" class="exportPdf" (click)="exportPdfDocument()">Export PDF</button>
+    </div>
 </div>

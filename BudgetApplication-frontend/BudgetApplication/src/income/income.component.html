@@ -1,5 +1,5 @@
 <div class="income-container">
-  <h2>Add Income</h2>
+  <h2>{{ incomeId ? 'Edit Income' : 'Add Income' }}</h2>
 
   <form [formGroup]="incomeForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -15,7 +15,7 @@
       </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" *ngIf="!isEditMode">
       <label for="categoryId">Category:</label>
       <select id="categoryId" formControlName="categoryId" required>
         <option value="">--Select Category--</option>
@@ -30,7 +30,7 @@
       <input id="amount" type="number" formControlName="amount" placeholder="0.00" required />
     </div>
 
-    <div class="form-group">
+    <div class="form-group" *ngIf="!isEditMode">
       <label for="type">Type:</label>
       <select id="type" formControlName="type" required>
         <option value="Real">Real</option>
@@ -38,7 +38,10 @@
       </select>
     </div>
 
-    <button type="submit" [disabled]="incomeForm.invalid">Add Income</button>
+    <button type="submit" [disabled]="incomeForm.invalid">
+      {{ incomeId ? 'Update Income' : 'Add Income' }}
+    </button>
+    <button type="button" (click)="cancelEdit()" *ngIf="isEditMode">Cancel Edit</button>
   </form>
 
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>

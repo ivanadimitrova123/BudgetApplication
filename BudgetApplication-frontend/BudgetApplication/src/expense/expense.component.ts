@@ -93,7 +93,7 @@ export class ExpenseComponent implements OnInit {
       'Authorization': `Bearer ${token}`
     });
 
-    this.http.get<Category[]>('http://localhost:5030/api/categories', { headers })
+    this.http.get<Category[]>('http://localhost:5030/api/categories/expense', { headers })
       .subscribe({
         next: (response) => {
           this.categories = response;
@@ -212,7 +212,7 @@ export class ExpenseComponent implements OnInit {
           .subscribe({
             next: (response) => {
               this.successMessage = 'Expense added successfully.';
-              this.router.navigate(['/list-expense']);
+              this.router.navigate(['/home']);
             },
             error: (error) => {
               this.errorMessage = error.error?.message || 'Failed to add expense.';

@@ -16,7 +16,8 @@ export class CategoryComponent {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.categoryForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      categoryFor: ['', Validators.required]  
     });
   }
 
@@ -28,10 +29,12 @@ export class CategoryComponent {
         'Authorization': `Bearer ${token}`
       });
   
-      const categoryName: string = this.categoryForm.value.name;
-      const body = JSON.stringify(categoryName);
-  
-      this.http.post('http://localhost:5030/api/categories', body, { headers, responseType: 'json' })
+      const categoryData = {
+        name: this.categoryForm.value.name,
+        categoryFor: this.categoryForm.value.categoryFor
+      };
+
+      this.http.post('http://localhost:5030/api/categories', categoryData, { headers, responseType: 'json' })
         .subscribe({
           next: (response: any) => {
             this.successMessage = response.message;
@@ -45,5 +48,4 @@ export class CategoryComponent {
         });
     }
   }
-  
 }

@@ -6,7 +6,8 @@ public interface ICategoryService
 {
     Task<IEnumerable<Category>> GetAllCategoriesAsync();
     Task<Category?> GetCategoryByIdAsync(int id);
-    Task<bool> AddCategoryAsync(string name);
+    Task<IEnumerable<Category>> GetCategoriesByTypeAsync(string categoryFor); 
+    Task<bool> AddCategoryAsync(string name, string type);
     Task<bool> UpdateCategoryAsync(int id, string name);
     Task<bool> DeleteCategoryAsync(int id);
 }

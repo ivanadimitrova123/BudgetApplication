@@ -1,49 +1,59 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" type="button" [routerLink]="'/home'">Budget App</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/home'" routerLinkActive="active">Home</a>
+  <div class="container-fluid">
+    <a class="navbar-brand" type="button" routerLink="/home">Budget App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item" *ngIf="isLoggedIn();">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn();">
+          <a class="nav-link" routerLink="/list-expense" routerLinkActive="active">Expenses</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn();">
+          <a class="nav-link" routerLink="/list-income" routerLinkActive="active">Income</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn();">
+          <a class="nav-link" routerLink="/category" routerLinkActive="active">Category</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        <ng-container *ngIf="!isLoggedIn(); else loggedIn">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/list-expense'" routerLinkActive="active">Expenses</a>
+            <a class="nav-link" routerLink="/login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/list-income'" routerLinkActive="active">Income</a>
+            <a class="nav-link" routerLink="/register">Register</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/category'" routerLinkActive="active">Category</a>
+        </ng-container>
+
+        <ng-template #loggedIn>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Account
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/updateUser', userId]">Update Profile</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <button class="dropdown-item" (click)="deactivateAccount()">Deactivate My Account</button>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <button class="dropdown-item" (click)="logout()">Log Out</button>
+              </li>
+              <li>
+              </li>
+            </ul>
           </li>
-        </ul>
-        
-        <ul class="navbar-nav">
-          <ng-container *ngIf="!isLoggedIn(); else loggedIn">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/register">Register</a>
-            </li>
-          </ng-container>
-          
-          <ng-template #loggedIn>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                Account
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" [routerLink]="'/updateUser/{id}'">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
-              </ul>
-            </li>
-          </ng-template>
-        </ul>
-      </div>
+        </ng-template>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
