@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DWkjzS9MLxDdbOL1Bj+g8YQZrLu8xKOE4y1rCJi9+1XOexmYFs5TsGIPqT609CbotbizLVxMoHGVs+13EFv/og==",
+  "dgSpecHash": "8tDZgtJowhjhjGoz0aWau4PaISotWuAkmPX1EGfhsnmRfh3zBUiLE855ayqCV6mM4zH2Bl3F5gWquoNXHuNQ3A==",
   "success": true,
   "projectFilePath": "C:\\Users\\ivana\\Desktop\\BudgetApplication-KINGICT\\BudgetApplication-backend\\BudgetApplication-KINGICT\\BudgetApplication-KINGICT.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ivana\\.nuget\\packages\\azure.communication.email\\1.0.1\\azure.communication.email.1.0.1.nupkg.sha512",
     "C:\\Users\\ivana\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",
     "C:\\Users\\ivana\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\ivana\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

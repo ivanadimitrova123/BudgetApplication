@@ -1,13 +1,9 @@
 ﻿using BudgetApplication_KINGICT.Data.Models;
 using BudgetApplication_KINGICT.Services.Interfaces;
+using Azure.Communication.Email;
+using Azure;
 
 namespace BudgetApplication_KINGICT.Services.Implementation;
-
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
 
 public class EmailService : IEmailService
 {
@@ -22,29 +18,33 @@ public class EmailService : IEmailService
     {
         try
         {
-            var host = _configuration["EmailOptions:Host"];
-            var port = int.Parse(_configuration["EmailOptions:Port"]);
-            var sender = _configuration["EmailOptions:SenderEmail"];
+            //add this in app settings json swith comment comentar 
+            string connectionString = "endpoint=https://email-sender-resource.europe.communication.azure.com/;accesskey=6HTBaNhAN5SsrAlPbtc6e28Kws7U3l43Xx1bPzpSfFD8nGswuN6KJQQJ99BBACULyCpvWPRoAAAAAZCSOqVQ";
+            var emailClient = new EmailClient(connectionString);
 
-            var password = Environment.GetEnvironmentVariable("EmailOptionsPassword");
+            var emailMessage = new EmailMessage(
+                //add in app settings jsont
+                senderAddress: "DoNotReply@bc6f26a0-6735-4585-a59f-49d8f066feb5.azurecomm.net",
+                //subject
+                content: new EmailContent("Test Email")
+                {
+                    //?
+                    PlainText = "Hello",
+                    //body
+                    Html = @"
+		                    <html>
+			                    <body>
+				                    <h1>Hello world via email.</h1>
+			                    </body>
+		                    </html>"
+                },
+                recipients: new EmailRecipients(new List<EmailAddress> { new EmailAddress("ivanadimitrova23@gmail.com") }));
+    
 
-            using var smtpClient = new SmtpClient(host, port)
-            {
-                Credentials = new NetworkCredential(sender, password),
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network
-            };
+            EmailSendOperation emailSendOperation = emailClient.Send(
+                WaitUntil.Completed,
+                emailMessage);
 
-            var message = new MailMessage
-            {
-                From = new MailAddress(sender),
-                Subject = request.Subject,
-                Body = request.Body,
-                IsBodyHtml = false
-            };
-            message.To.Add(request.To);
-
-            await smtpClient.SendMailAsync(message);
 
             return new EmailResponse(true, $"Email sent to {request.To}");
         }
