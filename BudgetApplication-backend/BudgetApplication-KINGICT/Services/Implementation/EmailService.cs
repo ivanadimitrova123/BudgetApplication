@@ -23,40 +23,6 @@ public class EmailService : IEmailService
         _senderEmail = _configuration["AzureEmail:SenderEmail"] ?? throw new ArgumentNullException("AzureEmail:SenderEmail is missing");
     }
 
-   /* public async Task<EmailResponse> SendEmailAsync(EmailRequest request)
-    {
-        try
-        {
-           var emailClient = new EmailClient(_connectionString);
-
-            var emailMessage = new EmailMessage(
-                senderAddress: _senderEmail,
-                content: new EmailContent(request.Subject)
-                {
-                    PlainText = request.Body,
-                    Html = $@"
-                        <html>
-                            <body>
-                                <h1>{request.Body}</h1>
-                            </body>
-                        </html>"
-                },
-                recipients: new EmailRecipients(new List<EmailAddress> { new EmailAddress(request.To) }));
-    
-
-            EmailSendOperation emailSendOperation = emailClient.Send(
-                WaitUntil.Completed,
-                emailMessage);
-
-
-            return new EmailResponse(true, $"Email sent to {request.To}");
-        }
-        catch (Exception ex)
-        {
-            return new EmailResponse(false, ex.GetBaseException().Message);
-        }
-    }*/
-
    public async Task<EmailResponse> SendEmailAsync(string email, string templateName, Dictionary<string, string> placeholders)
    {
        try

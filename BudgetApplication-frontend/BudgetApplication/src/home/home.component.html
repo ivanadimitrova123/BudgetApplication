@@ -76,4 +76,17 @@
     <div class="exportPdf">
         <button type="button" class="exportPdf" (click)="exportPdfDocument()">Export PDF</button>
     </div>
+
+    <div>
+        <h2>Send Monthly Report</h2>
+        <form (submit)="sendMonthlyReport(); $event.preventDefault()">
+          <label for="username">Username:</label>
+          <input id="username" type="text" [(ngModel)]="username" name="username" required />
+      
+          <label for="month">Month:</label>
+          <input id="month" type="text" [(ngModel)]="month" name="month" required />      
+          <button type="submit">Send Report</button>
+        </form>
+      </div>
+      
 </div>

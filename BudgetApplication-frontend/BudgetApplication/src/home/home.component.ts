@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { FormsModule } from '@angular/forms';  
 
 interface Category {
   id: number;
@@ -37,7 +38,7 @@ interface Expense {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -50,6 +51,8 @@ export class HomeComponent implements OnInit {
   errorMessage: string = '';
   token: string | null = null;
   userId: number | null = null;
+  username: string = '';
+  month: string = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -57,6 +60,28 @@ export class HomeComponent implements OnInit {
     this.token = localStorage.getItem('token');
     this.userId = this.getUserIdFromToken();
     this.fetchAllData();
+  }
+
+  sendMonthlyReport() {
+    if (!this.username || !this.month) {
+      alert('Please enter both username and month.');
+      return;
+    }
+
+    const requestData = {
+      username: this.username,
+      month: this.month
+    };
+    const url = `http://localhost:5030/api/users/send-monthly-report/${this.username}/${this.month}`;
+
+    this.http.post(url, {}).subscribe(
+      response => {
+        alert('Monthly report sent successfully.');
+      },
+      error => {
+        alert('Failed to send monthly report.');
+      }
+    );
   }
 
   getUserIdFromToken(): number | null {
