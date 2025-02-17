@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 public interface IEmailService
 {
-    Task<EmailResponse> SendEmailAsync(EmailRequest request);
+    Task<EmailResponse> SendEmailAsync(string email, string templateName, Dictionary<string, string> placeholders);
+
 }

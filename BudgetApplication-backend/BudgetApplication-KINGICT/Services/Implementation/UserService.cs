@@ -43,31 +43,10 @@ public class UserService : IUserService
         user.IsUserActive = true;
         await _userRepository.AddUserAsync(user);
         
-        // Send Welcome Email
-        try
+        await _emailService.SendEmailAsync(user.Email, "Registration", new Dictionary<string, string>
         {
-            var emailRequest = new EmailRequest
-            {
-                To = user.Email,
-                Subject = "Welcome to BudgetApplication!",
-                Body = $@"
-                        <html>
-                            <body>
-                                <h2>Welcome, {user.FirstName}!</h2>
-                                <p>Thank you for registering with <strong>BudgetApplication</strong>. We are excited to have you onboard.</p>
-                                <p>Feel free to explore the app and start managing your budget efficiently.</p>
-                                <br>
-                                <p>Best regards,<br>BudgetApplication Team</p>
-                            </body>
-                        </html>"
-            };
-            await _emailService.SendEmailAsync(emailRequest);
-            _logger.LogInformation($"Welcome email sent to {user.Email}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Failed to send welcome email to {user.Email}: {ex.Message}");
-        }
+            { "UserName", user.Username }
+        });
     }
     
     public async Task<string?> LoginAsync(LoginDto model)
@@ -165,5 +144,9 @@ public class UserService : IUserService
     public async Task<User> GetUserByIdAsync(long userId)
     {
         return await _userRepository.GetUserByIdAsync(userId); 
+    }
+    public async Task<User> GetUserByUsernameAsync(string username)
+    {
+        return await _userRepository.GetUserByUsernameAsync(username); 
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BudgetApplication-KINGICT")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c97fb387e121ceb05dd8abe7c2e0d6d615e2db1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ef632bdacc3e4d75414a38c9a8a30224e621e63")]
 [assembly: System.Reflection.AssemblyProductAttribute("BudgetApplication-KINGICT")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BudgetApplication-KINGICT")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

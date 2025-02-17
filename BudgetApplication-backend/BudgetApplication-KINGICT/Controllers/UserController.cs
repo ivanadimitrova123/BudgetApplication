@@ -1,4 +1,5 @@
-﻿using BudgetApplication_KINGICT.Data.Dtos;
+﻿using System.Globalization;
+using BudgetApplication_KINGICT.Data.Dtos;
 using BudgetApplication_KINGICT.Data.Models;
 using BudgetApplication_KINGICT.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +12,12 @@ namespace BudgetApplication_KINGICT.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IEmailService _emailService;
 
-    public UsersController(IUserService userService)
+    public UsersController(IUserService userService,IEmailService emailService)
     {
         _userService = userService;
+        _emailService = emailService;
     }
     
     [HttpGet("{id}")]
@@ -98,4 +101,26 @@ public class UsersController : ControllerBase
         return Ok(new { message = "User profile deactivated successfully" });
     }
     
+    [HttpPost("send-monthly-report/{username}/{month}")]
+    public async Task<IActionResult> SendMonthlyReport(string username, string month)
+    {
+        var user = await _userService.GetUserByUsernameAsync(username);
+        if (user == null)
+        {
+            return NotFound(new { message = "User not found" });
+        }
+
+        if (!DateTime.TryParseExact(month, "MMMM", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedMonth))
+        {
+            return BadRequest(new { message = "Invalid month format" });
+        }
+
+        await _emailService.SendEmailAsync(user.Email, "MonthlyReport", new Dictionary<string, string>
+        {
+            { "UserName", user.Username },
+            { "Month", parsedMonth.ToString("MMMM") }
+        });
+
+        return Ok(new { message = "Monthly report sent successfully" });
+    }
 }

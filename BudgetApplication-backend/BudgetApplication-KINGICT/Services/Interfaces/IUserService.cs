@@ -5,7 +5,8 @@ namespace BudgetApplication_KINGICT.Services.Interfaces;
 
 public interface IUserService
 {
-    Task<User> GetUserByIdAsync(long userId);  
+    Task<User> GetUserByIdAsync(long userId); 
+    Task<User> GetUserByUsernameAsync(string username);  
     Task RegisterUserAsync(User user);
     Task<bool> DeleteUserAsync(int id);
     Task<bool> EditUserAsync(int id, User user);

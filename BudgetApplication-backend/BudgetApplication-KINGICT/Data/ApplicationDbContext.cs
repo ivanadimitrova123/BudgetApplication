@@ -15,5 +15,6 @@ public class ApplicationDbContext : DbContext
     
     public DbSet<Income> Incomes { get; set; }
 
-    
+    public DbSet<EmailTemplate> EmailTemplates { get; set; }
+
 }
