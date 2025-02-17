@@ -8,37 +8,38 @@ namespace BudgetApplication_KINGICT.Services.Implementation;
 public class EmailService : IEmailService
 {
     private readonly IConfiguration _configuration;
+    private readonly ILogger<EmailService> _logger;
+    private readonly string _connectionString;
+    private readonly string _senderEmail;
 
-    public EmailService(IConfiguration configuration)
+    public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
     {
         _configuration = configuration;
+        _logger = logger;
+        
+        _connectionString = _configuration["AzureEmail:ConnectionString"] ?? throw new ArgumentNullException("AzureEmail:ConnectionString is missing");
+        _senderEmail = _configuration["AzureEmail:SenderEmail"] ?? throw new ArgumentNullException("AzureEmail:SenderEmail is missing");
     }
 
     public async Task<EmailResponse> SendEmailAsync(EmailRequest request)
     {
         try
         {
-            //add this in app settings json swith comment comentar 
-            string connectionString = "endpoint=https://email-sender-resource.europe.communication.azure.com/;accesskey=6HTBaNhAN5SsrAlPbtc6e28Kws7U3l43Xx1bPzpSfFD8nGswuN6KJQQJ99BBACULyCpvWPRoAAAAAZCSOqVQ";
-            var emailClient = new EmailClient(connectionString);
+           var emailClient = new EmailClient(_connectionString);
 
             var emailMessage = new EmailMessage(
-                //add in app settings jsont
-                senderAddress: "DoNotReply@bc6f26a0-6735-4585-a59f-49d8f066feb5.azurecomm.net",
-                //subject
-                content: new EmailContent("Test Email")
+                senderAddress: _senderEmail,
+                content: new EmailContent(request.Subject)
                 {
-                    //?
-                    PlainText = "Hello",
-                    //body
-                    Html = @"
-		                    <html>
-			                    <body>
-				                    <h1>Hello world via email.</h1>
-			                    </body>
-		                    </html>"
+                    PlainText = request.Body,
+                    Html = $@"
+                        <html>
+                            <body>
+                                <h1>{request.Body}</h1>
+                            </body>
+                        </html>"
                 },
-                recipients: new EmailRecipients(new List<EmailAddress> { new EmailAddress("ivanadimitrova23@gmail.com") }));
+                recipients: new EmailRecipients(new List<EmailAddress> { new EmailAddress(request.To) }));
     
 
             EmailSendOperation emailSendOperation = emailClient.Send(

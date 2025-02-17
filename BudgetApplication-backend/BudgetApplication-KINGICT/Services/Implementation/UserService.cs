@@ -14,11 +14,15 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IEmailService _emailService;
+    private readonly ILogger<UserService> _logger;
     
-    public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
+    public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher,IEmailService emailService,ILogger<UserService> logger)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
+        _emailService = emailService;
+        _logger = logger;
     }
     
     public async Task RegisterUserAsync(User user)
@@ -38,6 +42,32 @@ public class UserService : IUserService
         user.PasswordHash = _passwordHasher.HashPassword(user, user.PasswordHash);
         user.IsUserActive = true;
         await _userRepository.AddUserAsync(user);
+        
+        // Send Welcome Email
+        try
+        {
+            var emailRequest = new EmailRequest
+            {
+                To = user.Email,
+                Subject = "Welcome to BudgetApplication!",
+                Body = $@"
+                        <html>
+                            <body>
+                                <h2>Welcome, {user.FirstName}!</h2>
+                                <p>Thank you for registering with <strong>BudgetApplication</strong>. We are excited to have you onboard.</p>
+                                <p>Feel free to explore the app and start managing your budget efficiently.</p>
+                                <br>
+                                <p>Best regards,<br>BudgetApplication Team</p>
+                            </body>
+                        </html>"
+            };
+            await _emailService.SendEmailAsync(emailRequest);
+            _logger.LogInformation($"Welcome email sent to {user.Email}");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Failed to send welcome email to {user.Email}: {ex.Message}");
+        }
     }
     
     public async Task<string?> LoginAsync(LoginDto model)
