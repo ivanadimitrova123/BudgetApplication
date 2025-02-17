@@ -78,6 +78,9 @@ public class UserRepository : IUserRepository
         _context.Users.Update(user);
     }
     
-    
+    public async Task<List<string>> GetAllUsernamesAsync()
+    {
+        return await _context.Users.Select(u => u.Username).ToListAsync();
+    }
 
 }

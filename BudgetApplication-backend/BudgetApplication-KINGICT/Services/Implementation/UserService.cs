@@ -149,4 +149,8 @@ public class UserService : IUserService
     {
         return await _userRepository.GetUserByUsernameAsync(username); 
     }
+    public async Task<List<string>> GetAllUsernamesAsync()
+    {
+        return await _userRepository.GetAllUsernamesAsync();
+    }
 }

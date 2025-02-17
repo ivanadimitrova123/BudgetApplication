@@ -14,5 +14,6 @@ public interface IUserService
 
     Task<bool> DeactivateUserAsync(int id);
 
+    Task<List<string>> GetAllUsernamesAsync();
 
 }

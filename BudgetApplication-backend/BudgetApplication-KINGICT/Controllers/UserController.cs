@@ -52,6 +52,13 @@ public class UsersController : ControllerBase
         }
     }
     
+    [HttpGet("usernames")]
+    public async Task<IActionResult> GetAllUsernames()
+    {
+        var usernames = await _userService.GetAllUsernamesAsync();
+        return Ok(usernames);
+    }
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {

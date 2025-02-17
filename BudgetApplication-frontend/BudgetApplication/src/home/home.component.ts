@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   userId: number | null = null;
   username: string = '';
   month: string = '';
+  usernames: string[] = []; 
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -60,6 +61,25 @@ export class HomeComponent implements OnInit {
     this.token = localStorage.getItem('token');
     this.userId = this.getUserIdFromToken();
     this.fetchAllData();
+    this.fetchUsernames();
+  }
+
+  fetchUsernames() {
+    if (!this.token) return;
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    this.http.get<string[]>('http://localhost:5030/api/users/usernames', { headers })
+      .subscribe(
+        (data) => {
+          this.usernames = data;
+        },
+        (error) => {
+          console.error('Error fetching usernames:', error);
+        }
+      );
   }
 
   sendMonthlyReport() {

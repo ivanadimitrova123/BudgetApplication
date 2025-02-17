@@ -80,13 +80,18 @@
     <div>
         <h2>Send Monthly Report</h2>
         <form (submit)="sendMonthlyReport(); $event.preventDefault()">
-          <label for="username">Username:</label>
-          <input id="username" type="text" [(ngModel)]="username" name="username" required />
-      
-          <label for="month">Month:</label>
-          <input id="month" type="text" [(ngModel)]="month" name="month" required />      
-          <button type="submit">Send Report</button>
+            <label for="username">Username:</label>
+            <input id="username" type="text" [(ngModel)]="username" name="username" list="userList" required />
+            <datalist id="userList">
+                <option *ngFor="let user of usernames" [value]="user"></option>
+            </datalist>
+    
+            <label for="month">Month:</label>
+            <input id="month" type="text" [(ngModel)]="month" name="month" required />      
+            
+            <button type="submit">Send Report</button>
         </form>
-      </div>
+    </div>
+    
       
 </div>
