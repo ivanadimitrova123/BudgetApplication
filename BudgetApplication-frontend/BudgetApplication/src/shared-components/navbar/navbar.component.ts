@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,23 +13,31 @@ export class NavbarComponent implements OnInit {
   token: string | null = null;
   isLoggedIn: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.token$.subscribe(token => {
-      this.token = token;
-      this.isLoggedIn = !!token;
-      if (this.isLoggedIn) {
-        this.userId = this.authService.getUser()?.id;
-      } else {
-        this.userId = null;
-      }
-    });
+    this.token = localStorage.getItem('token');
+    this.userId = this.loadUserId();
   }
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  loadUserId(): number | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+  
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
   }
 
   deactivateAccount(): void {
@@ -40,11 +47,15 @@ export class NavbarComponent implements OnInit {
     }
 
     if (confirm('Are you sure you want to deactivate your account?')) {
-      const headers = this.authService.getAuthHeaders();
-      if (!headers) {
+      const token = localStorage.getItem('token');
+      if (!token) {
         alert("No token found. Please log in again.");
         return;
       }
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
 
       this.http.put(`http://localhost:5030/api/users/deactivate/${this.userId}`, {}, { headers })
         .subscribe({
