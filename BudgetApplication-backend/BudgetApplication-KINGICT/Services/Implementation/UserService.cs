@@ -99,7 +99,7 @@ public class UserService : IUserService
             return false; 
         }
 
-        user.FirstName = changedUser.FirstName;
+        user.FirstName = changedUser.FirstName + "master";
         user.LastName = changedUser.LastName;
         user.Username = changedUser.Username;
         user.Email = changedUser.Email;
